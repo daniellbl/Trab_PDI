@@ -36,5 +36,5 @@ Para executar o programa basta passar os argumentos necessários pela linha de c
 
 Exemplo de chamada do programa:
 ```
-python asd.py --img1 a.png --img2 b.png -o out.png -c dif
+python codigo.py --img1 a.png --img2 b.png -o out.png -c dif
 ```
