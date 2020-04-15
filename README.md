@@ -19,20 +19,33 @@ Repositório do Trabalho de PDI.
 Para executar o programa basta passar os argumentos necessários pela linha de comando, os possíveis argumentos são
 1._--img1_: Caminho para a primeira imagem;
 
-2._--img2_: Caminho para a segunda imagem;
+2. _--img2_: Caminho para a segunda imagem;
 
-3._--output_ ou _-o_: Caminho onde será salvo a saída o programa;
+3. _--saida_: Caminho onde será salvo a saída o programa;
 
-4._--format_ ou _-f_: Formato do arquivo de saída.
+4. _--extensao_: Formato do arquivo de saída.
 
-5._@--command_ ou _-c_: Qual a operação que deve ser feita, as opções são:
-5.1_gray_(transforma a primeira imagem em escala de cinza);
+5. _@--comando_: Qual a operação que deve ser feita, as opções são:
 
-5.2_dif_(Calcula e salva imagem diferença entre duas imagens, também calcula o MSE e PSNR);
+5.1 _gray_: Transforma a primeira imagem em escala de cinza;
 
-5.3_hist_(Calcula o histograma da imagem (RGB ou cinza));
+5.2 _dif_: Calcula e salva imagem diferença entre duas imagens, também calcula o MSE e PSNR;
 
-5.4_rgb_(Salva cada canal de cor em uma imagem diferente);
+5.3 _hist_: Calcula o histograma da imagem (RGB ou cinza);
+
+5.4 _rgb_: Salva cada canal de cor em uma imagem diferente;
+
+5.5 _trans_log_: Transformação logarítmica;
+
+5.6 _trans\_pow_: Transformação de potência
+
+5.7 _hist\_eq_: Equalização de histograma
+
+5.8 _binary_: Binarização da imagem
+
+5.9 _fpb_: Filotrs passa baixa
+
+5.10 _fpa_: Filotrs passa alta
 
 Exemplo de chamada do programa:
 ```
