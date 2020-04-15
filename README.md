@@ -19,9 +19,13 @@ Repositório do Trabalho de PDI.
 Para executar o programa basta passar os argumentos necessários pela linha de comando, os possíveis argumentos são
 
 1._--img1_: Caminho para a primeira imagem;
+
 2. _--img2_: Caminho para a segunda imagem;
+
 3. _--saida_: Caminho onde será salvo a saída o programa;
-4. _--extensao_: Formato do arquivo de saída.
+
+4. _--extensao_: Formato do arquivo de saída, exemplo: "png", "jpg".
+
 5. _@--comando_: Qual a operação que deve ser feita, as opções são:
 
 5.1 _gray_: Transforma a primeira imagem em escala de cinza;
@@ -34,17 +38,31 @@ Para executar o programa basta passar os argumentos necessários pela linha de c
 
 5.5 _trans_log_: Transformação logarítmica;
 
-5.6 _trans\_pow_: Transformação de potência
+5.6 _trans\_pow_: Transformação de potência;
 
-5.7 _hist\_eq_: Equalização de histograma
+5.7 _hist\_eq_: Equalização de histograma;
 
-5.8 _binary_: Binarização da imagem
+5.8 _binary_: Binarização da imagem;
 
-5.9 _fpb_: Filotrs passa baixa
+5.9 _fpb_: Filtros passa baixa;
 
-5.10 _fpa_: Filotrs passa alta
+5.10 _fpa_: Filtros passa alta.
+
+6. _@--gamma_: Parâmetro para a função de transformação de potência;
+
+6. _@--limiar_: Parâmetro usado na função de binarização;
+
+6. _@--kernel_: Tamanho da máscara usado nos filtros;
+
+6. _@--desvio_: Desvio padrão usado no filtro Gaussiano;
+
+6. _@--filtro_: Qual a operação que deve ser feita, as opções são:
+
+6.1 _media_, _gaus_ e _mediana_ para filtros passa baixa.
+
+6.1 _lap_ e _sob_ para filtros passa alta.
 
 Exemplo de chamada do programa:
 ```
-python codigo.py --img1 a.png --img2 b.png -o out.png -c dif
+python codigo.py --img1 a.png --img2 b.png -saida out.png -comando dif
 ```
