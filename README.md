@@ -17,14 +17,11 @@ Repositório do Trabalho de PDI.
 
 # Execução
 Para executar o programa basta passar os argumentos necessários pela linha de comando, os possíveis argumentos são
+
 1._--img1_: Caminho para a primeira imagem;
-
 2. _--img2_: Caminho para a segunda imagem;
-
 3. _--saida_: Caminho onde será salvo a saída o programa;
-
 4. _--extensao_: Formato do arquivo de saída.
-
 5. _@--comando_: Qual a operação que deve ser feita, as opções são:
 
 5.1 _gray_: Transforma a primeira imagem em escala de cinza;
