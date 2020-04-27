@@ -18,51 +18,67 @@ Repositório do Trabalho de PDI.
 # Execução
 Para executar o programa basta passar os argumentos necessários pela linha de comando, os possíveis argumentos são
 
-1._--img1_: Caminho para a primeira imagem;
+1. _--img1_: Caminho para a primeira imagem;
 
-2. _--img2_: Caminho para a segunda imagem;
+1. _--img2_: Caminho para a segunda imagem;
 
-3. _--saida_: Caminho onde será salvo a saída o programa;
+1. _--saida_: Caminho onde será salvo a saída o programa;
 
-4. _--extensao_: Formato do arquivo de saída, exemplo: "png", "jpg".
+1. _--extensao_: Formato do arquivo de saída, exemplo: "png", "jpg".
 
-5. _@--comando_: Qual a operação que deve ser feita, as opções são:
+1. _@--comando_: Qual a operação que deve ser feita, as opções são:
 
-5.1 _gray_: Transforma a primeira imagem em escala de cinza;
+   1. _gray_: Transforma a primeira imagem em escala de cinza;
 
-5.2 _dif_: Calcula e salva imagem diferença entre duas imagens, também calcula o MSE e PSNR;
+   1. _dif_: Calcula e salva imagem diferença entre duas imagens, também calcula o MSE e PSNR;
 
-5.3 _hist_: Calcula o histograma da imagem (RGB ou cinza);
+   1. _hist_: Calcula o histograma da imagem (RGB ou cinza);
 
-5.4 _rgb_: Salva cada canal de cor em uma imagem diferente;
+   1. _rgb_: Salva cada canal de cor em uma imagem diferente;
 
-5.5 _trans_log_: Transformação logarítmica;
+   1. _trans_log_: Transformação logarítmica;
 
-5.6 _trans\_pow_: Transformação de potência;
+   1. _trans\_pow_: Transformação de potência;
 
-5.7 _hist\_eq_: Equalização de histograma;
+   1. _hist\_eq_: Equalização de histograma;
 
-5.8 _binary_: Binarização da imagem;
+   1. _binary_: Binarização da imagem;
 
-5.9 _fpb_: Filtros passa baixa;
+   1. _fpb_: Filtros passa baixa;
 
-5.10 _fpa_: Filtros passa alta.
+   1. _fpa_: Filtros passa alta.
+   
+   1. _erosao_: Erosão de imagens binárias.
+   
+   1. _dilat_: Dilatação de imagens binárias.
 
-6. _@--gamma_: Parâmetro para a função de transformação de potência;
+1. _@--gamma_: Parâmetro para a função de transformação de potência;
 
-6. _@--limiar_: Parâmetro usado na função de binarização;
+1. _@--limiar_: Parâmetro usado na função de binarização;
 
-6. _@--kernel_: Tamanho da máscara usado nos filtros;
+1. _@--kernel_: Formato do kernel usado, as opções são:
+   
+   1. _ret_: Retangular;
 
-6. _@--desvio_: Desvio padrão usado no filtro Gaussiano;
+   1. _eli_: Elipse;
+   
+   1. _crz_: Em cruz.
 
-6. _@--filtro_: Qual a operação que deve ser feita, as opções são:
+1. _@--kernel\_x_: Tamanho do kernel em X;
 
-6.1 _media_, _gaus_ e _mediana_ para filtros passa baixa.
+1. _@--kernel\_y_: Tamanho do kernel em Y;
 
-6.1 _lap_ e _sob_ para filtros passa alta.
+1. _@--kernel_: Formato do kernel usado, as opções são:
+
+1. _@--desvio_: Desvio padrão usado no filtro Gaussiano;
+
+1. _@--filtro_: Qual a filtro que deve ser feito, as opções são:
+
+   1. _media_, _gaus_ e _mediana_ para filtros passa baixa.
+
+   1. _lap_ e _sob_ para filtros passa alta.
 
 Exemplo de chamada do programa:
 ```
-python codigo.py --img1 a.png --img2 b.png -saida out.png -comando dif
+python codigo.py --img1 a.png --img2 b.png --saida out.png --comando dif
 ```
