@@ -24,7 +24,7 @@ Para executar o programa basta passar os argumentos necessários pela linha de c
 
 1. _--saida_: Caminho onde será salvo a saída o programa;
 
-1. _--extensao_: Formato do arquivo de saída, exemplo: "png", "jpg".
+1. _--extensao_: Formato do arquivo de saída, exemplo: "png", "jpg" (default = png);
 
 1. _@--comando_: Qual a operação que deve ser feita, as opções são:
 
@@ -52,9 +52,9 @@ Para executar o programa basta passar os argumentos necessários pela linha de c
    
    1. _dilat_: Dilatação de imagens binárias.
 
-1. _@--gamma_: Parâmetro para a função de transformação de potência;
+1. _@--gamma_: Parâmetro para a função de transformação de potência (default = 1);
 
-1. _@--limiar_: Parâmetro usado na função de binarização;
+1. _@--limiar_: Parâmetro usado na função de binarização (default = 127);
 
 1. _@--kernel_: Formato do kernel usado, as opções são:
    
@@ -64,13 +64,13 @@ Para executar o programa basta passar os argumentos necessários pela linha de c
    
    1. _crz_: Em cruz.
 
-1. _@--kernel\_x_: Tamanho do kernel em X;
+1. _@--kernel\_x_: Tamanho do kernel em X (default = 3);
 
-1. _@--kernel\_y_: Tamanho do kernel em Y;
+1. _@--kernel\_y_: Tamanho do kernel em Y (default = 3);
 
 1. _@--kernel_: Formato do kernel usado, as opções são:
 
-1. _@--desvio_: Desvio padrão usado no filtro Gaussiano;
+1. _@--desvio_: Desvio padrão usado no filtro Gaussiano (default = 1);
 
 1. _@--filtro_: Qual a filtro que deve ser feito, as opções são:
 
