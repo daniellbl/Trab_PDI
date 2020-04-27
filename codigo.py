@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 PIXEL_MAX = 255.0
 EXTENSAO_DEFAULT = "png"
 LIMIAR_DEFAULT = 127
-FILTRO_DEFAULT = 3
+KERNEL_DEFAULT = "ret"
+KERNEL_SIZE_DEFAULT = 3
 DESVIO_DEFAULT = 1
 GAMMA_DEFAULT = 1
 WAIT_TIME = 10000
@@ -41,6 +42,16 @@ def psnr(img1, img2):
 	if mse == 0:
 		return 100
 	return 20 * math.log10(PIXEL_MAX / math.sqrt(mse))
+
+def make_kernel(kernel, kernel_x, kernel_y):
+	kernel_x = int(kernel_x)
+	kernel_y = int(kernel_y)
+	if kernel == "ret":
+		return cv.getStructuringElement(cv.MORPH_RECT,(kernel_x, kernel_y))
+	if kernel == "eli":
+		return cv.getStructuringElement(cv.MORPH_ELLIPSE,(kernel_x, kernel_y))
+	if kernel == "crz":
+		return cv.getStructuringElement(cv.MORPH_CROSS,(kernel_x, kernel_y))
 
 def command_gray(img):
 	try:
@@ -113,37 +124,43 @@ def command_hist_eq(img):
 	img_resul = cv.equalizeHist(img)
 	return img_resul
 
-def command_FPB_avg(img, tam_filt = FILTRO_DEFAULT):
-	tam_filt = int(tam_filt)
-	img_resul = cv.blur(img,(tam_filt,tam_filt))
+def command_FPB_avg(img, kernel_x = KERNEL_SIZE_DEFAULT, kernel_y = KERNEL_SIZE_DEFAULT):
+	kernel_size = int(kernel_size)
+	img_resul = cv.blur(img,(kernel_size,kernel_size))
 	return img_resul
 
-def command_FPB_gaus(img, tam_filt = FILTRO_DEFAULT, desv = DESVIO_DEFAULT):
-	tam_filt = int(tam_filt)
+def command_FPB_gaus(img, kernel_x = KERNEL_SIZE_DEFAULT, kernel_y = KERNEL_SIZE_DEFAULT, desv = DESVIO_DEFAULT):
+	kernel_size = int(kernel_size)
 	desv = int(desv)
-	img_resul = cv.GaussianBlur(img,(tam_filt,tam_filt), desv)
+	img_resul = cv.GaussianBlur(img,(kernel_size,kernel_size), desv)
 	return img_resul
 
-def command_FPB_median(img, tam_filt = FILTRO_DEFAULT):
-	tam_filt = int(tam_filt)
-	img_resul = cv.medianBlur(img,tam_filt)
+def command_FPB_median(img, kernel_x = KERNEL_SIZE_DEFAULT, kernel_y = KERNEL_SIZE_DEFAULT):
+	kernel_size = int(kernel_size)
+	img_resul = cv.medianBlur(img, kernel_size)
 	return img_resul
 
-def command_FPA_laplace(img, tam_filt = FILTRO_DEFAULT):
-	tam_filt = int(tam_filt)
+def command_FPA_laplace(img):
 	img_resul = cv.Laplacian(img, cv.CV_8U)
 	return img_resul
 
-def command_FPA_sobel(img, tam_filt = FILTRO_DEFAULT):
-	tam_filt = int(tam_filt)
-	img_resul = cv.Sobel(img,cv.CV_8U,1,0,ksize=tam_filt)
+def command_FPA_sobel(img, kernel_x = KERNEL_SIZE_DEFAULT, kernel_y = KERNEL_SIZE_DEFAULT):
+	kernel_size = int(kernel_size)
+	img_resul = cv.Sobel(img,cv.CV_8U,1,0,ksize=kernel_size)
 	show_img(img_resul, "Imagem Resultado")
-	img_resul = cv.Sobel(img,cv.CV_8U,0,1,ksize=tam_filt)
+	img_resul = cv.Sobel(img,cv.CV_8U,0,1,ksize=kernel_size)
 	show_img(img_resul, "Imagem Resultado")
-	img_resul = cv.Sobel(img,cv.CV_8U,1,1,ksize=tam_filt)
+	img_resul = cv.Sobel(img,cv.CV_8U,1,1,ksize=kernel_size)
 	show_img(img_resul, "Imagem Resultado")
 	return img_resul
 
+def command_erosao (img, kernel = KERNEL_DEFAULT, kernel_x = KERNEL_SIZE_DEFAULT, kernel_y = KERNEL_SIZE_DEFAULT):
+	erosion = cv.erode(img, make_kernel(kernel, kernel_x, kernel_y), iterations = 1)
+	return erosion
+
+def command_dilatacao (img, kernel = KERNEL_DEFAULT, kernel_x = KERNEL_SIZE_DEFAULT, kernel_y = KERNEL_SIZE_DEFAULT):
+	dilation = cv.dilate(img, make_kernel(kernel, kernel_x, kernel_y), iterations = 1)
+	return dilation
 
 def command_rgb(img):
 	return cv.split(img)
@@ -157,9 +174,11 @@ def command_rgb(img):
 @click.option('--gamma')
 @click.option('--limiar')
 @click.option('--kernel')
+@click.option('--kernel_x')
+@click.option('--kernel_y')
 @click.option('--desvio')
 @click.option('--filtro')
-def process(img1, img2, out_file, extensao, comando, gamma, limiar, kernel, desvio, filtro):
+def process(img1, img2, out_file, extensao, comando, gamma, limiar, kernel, kernel_x, kernel_y, desvio, filtro):
 	img1 = cv.imread(img1, cv.IMREAD_UNCHANGED)
 	show_img(img1, "Imagem 1")
 	if img2 is not None:
@@ -183,16 +202,20 @@ def process(img1, img2, out_file, extensao, comando, gamma, limiar, kernel, desv
 		img_resul = command_binary(img1, limiar)
 	elif comando == "fpb":
 		if filtro == "media":
-			img_resul = command_FPB_avg(img1, kernel)
+			img_resul = command_FPB_avg(img1, kernel_x, kernel_y)
 		elif filtro == "gaus":
-			img_resul = command_FPB_gaus(img1, kernel, desvio)
+			img_resul = command_FPB_gaus(img1, kernel_x, kernel_y, desvio)
 		elif filtro == "mediana":
-			img_resul = command_FPB_median(img1, kernel)
+			img_resul = command_FPB_median(img1, kernel_x, kernel_y)
 	elif comando == "fpa":
 		if filtro == "lap":
-			img_resul = command_FPA_laplace(img1, kernel)
+			img_resul = command_FPA_laplace(img1)
 		if filtro == "sob":
-			img_resul = command_FPA_sobel(img1, kernel)
+			img_resul = command_FPA_sobel(img1, kernel_x, kernel_y)
+	elif comando == "erosao":
+		img_resul = command_erosao(img1, kernel, kernel_x, kernel_y)
+	elif comando == "dilatacao":
+		img_resul = command_dilatacao(img1, kernel, kernel_x, kernel_y)
 	elif comando == "rgb":
 		if len(img1.shape) == 3:
 			channels = command_rgb(img1)
